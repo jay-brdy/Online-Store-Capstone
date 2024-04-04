@@ -14,12 +14,16 @@ function App() {
     setToken(newToken);
   };
 
+  const handleLogout = () => {
+    setToken(null); // Clear the token
+  };
+
   return (
     <>
       <h1>Jay's Online Store</h1>
       
       <Router>
-        <Navigations />
+        <Navigations token={token} handleLogout={handleLogout} />
 
         <Routes>
           <Route path="/" element={<Products />} />

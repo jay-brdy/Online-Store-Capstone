@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Navigations from "./components/Navigations"
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import Login from './components/Login';
@@ -18,6 +19,8 @@ function App() {
       <h1>Jay's Online Store</h1>
       
       <Router>
+        <Navigations />
+
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/login" element={<Login token={token} setToken={handleTokenUpdate} />} />

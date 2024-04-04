@@ -1,5 +1,4 @@
-# Unit4 Career Simulator - ACME Online Store
+# Full Stack Academy Capstone - Final Project
+## Online Store
 
-Work in progress... working, but needs more work. 
-
-[View products here!](https://jaybrdy-acme-online-store.onrender.com/api/products)
+Currently working towards MVP (Minimum Viable Product).

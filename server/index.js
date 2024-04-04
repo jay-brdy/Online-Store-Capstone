@@ -8,6 +8,7 @@ const {
     fetchUsers,
     fetchCarts,
     fetchProducts,
+    fetchProductById,
     fetchCartProducts,
     destroyCartProduct,
     authenticate,
@@ -15,6 +16,8 @@ const {
     updateCartProductQuantity,
     checkoutCart
   } = require('./db');
+
+  const cors = require('cors');
   const express = require('express');
   const app = express();
   app.use(express.json());
@@ -23,6 +26,12 @@ const {
   const path = require('path');
   app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../client/dist/index.html')));
   app.use('/assets', express.static(path.join(__dirname, '../client/dist/assets'))); 
+  app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT','DELETE'],
+    credentials: true,
+    withCredentials: true,
+  }))
   
   // check if user is logged in
   const isLoggedIn = async(req, res, next)=> {
@@ -34,13 +43,24 @@ const {
       next(ex);
     }
   };
+
+  // create a new user
+  app.post('/api/auth/register', async (req, res, next) => {
+    const { username, password } = req.body;
+    try {
+        const newUser = await createUser({ username, password });
+        res.status(201).json(newUser);
+    } catch (error) {
+        next(error);
+    }
+});
   
   // user auth
   app.post('/api/auth/login', async(req, res, next)=> {
     try {
       const { token } = await authenticate(req.body);
       const user = await findUserWithToken(token);
-      const cart = await fetchCart(user.id);
+      const cart = await fetchCarts(user.id);
       res.send({ token, user, cart });
     }
     catch(ex){
@@ -93,6 +113,21 @@ const {
       next(ex);
     }
   });
+
+  // retrieves single product by id
+  app.get('/api/products/:id', async (req, res, next) => {
+    const productId = req.params.id;
+    try {
+        const product = await fetchProductById(productId);
+        if (!product) {
+            res.status(404).json({ error: 'Product not found' });
+        } else {
+            res.json(product);
+        }
+    } catch (ex) {
+        next(ex);
+    }
+});
   
   // creates a product inside cart for a user
   app.post('/api/carts/:id/cart_products', isLoggedIn, async(req, res, next)=> {

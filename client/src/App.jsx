@@ -23,7 +23,7 @@ function App() {
           <Route path="/login" element={<Login token={token} setToken={handleTokenUpdate} />} />
           <Route path="/register" element={<Register token={token} setToken={handleTokenUpdate} />} />
           <Route path="/account" element={token ? <Account token={token} setToken={handleTokenUpdate} /> : <Navigate to="/login" />} />
-          <Route path="/product/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate} />} />
+          <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate} />} />
         </Routes>
       </Router>
     </>
@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App;
+export const API_URL = "http://localhost:3000";

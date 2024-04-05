@@ -6,6 +6,7 @@ import ProductDetail from './components/ProductDetail';
 import Login from './components/Login';
 import Register from './components/Register';
 import Account from './components/Account';
+import Cart from './components/Cart';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/register" element={<Register token={token} setToken={handleTokenUpdate} />} />
           <Route path="/account" element={token ? <Account token={token} setToken={handleTokenUpdate} /> : <Navigate to="/login" />} />
           <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate} />} />
+          <Route path="/carts/:id" element={<Cart token={token} setToken={handleTokenUpdate} />} />
         </Routes>
       </Router>
     </>

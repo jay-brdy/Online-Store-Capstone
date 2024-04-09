@@ -9,4 +9,3 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 4/3/2024 Working towards MVP (Minimum Viable Product).
 
 4/4/2024 Working on getting cart function to properly work and access user's carts. 
-

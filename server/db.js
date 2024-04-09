@@ -158,9 +158,11 @@ const fetchProductById = async (productId) => {
 
 const fetchCartProducts = async (user_id) => {
     const SQL = `
-        SELECT cp.* FROM cart_products cp
-        JOIN carts c ON cp.cart_id = c.id
-        WHERE c.user_id = $1
+        SELECT cart_products.*, products.name, products.description, products.price, cart_products.quantity
+        FROM cart_products
+        JOIN carts ON cart_products.cart_id = carts.id
+        JOIN products ON cart_products.product_id = products.id
+        WHERE carts.user_id = $1
     `;
     const response = await client.query(SQL, [user_id]);
     return response.rows;

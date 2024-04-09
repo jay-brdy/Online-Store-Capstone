@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 
 export default function ProductDetail({ token, handleAddToCart }) {
     const { id } = useParams();
-    console.log("product ID:", id); // Log the id parameter
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

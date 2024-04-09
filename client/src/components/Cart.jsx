@@ -24,7 +24,6 @@ export const handleAddToCart = async (userId, token, productId) => {
 
 // Define Cart component
 export default function Cart({ token, userId }) { 
-    console.log("USER ID:", userId); // DELETE LATER
     
     const [cartProducts, setCartProducts] = useState([]);
     const [loading, setLoading] = useState(true);

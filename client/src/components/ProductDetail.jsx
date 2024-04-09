@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_URL } from "../App";
+import Button from '@mui/material/Button';
 
 export default function ProductDetail({ token, handleAddToCart }) {
     const { id } = useParams();
@@ -50,6 +51,9 @@ export default function ProductDetail({ token, handleAddToCart }) {
                     <p>Price: ${product.price}</p>
                     <p>Inventory: {product.inventory}</p>
                     <button onClick={onAddToCartClick}>Add to Cart</button>
+                    <Button variant="contained" color="primary" onClick={onAddToCartClick}>
+                    Add to Cart
+                    </Button>
                 </div>
             )}
         </div>

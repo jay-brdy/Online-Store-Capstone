@@ -21,6 +21,7 @@ const {
   const express = require('express');
   const app = express();
   app.use(express.json());
+  app.use(require("morgan")("dev"));
   
   //for deployment only
   const path = require('path');
@@ -36,7 +37,7 @@ const {
   // check if user is logged in
   const isLoggedIn = async(req, res, next)=> {
     try {
-      req.user = await findUserWithToken(req.headers.authorization);
+      req.user = await findUserWithToken(req.headers.authorization.split(' ')[1]);
       next();
     }
     catch(ex){
@@ -72,7 +73,6 @@ const {
   app.get('/api/auth/me', isLoggedIn, async(req, res, next)=> {
     try {
       res.send(req.user);
-      //res.send(await findUserWithToken(req.headers.authorization));
     }
     catch(ex){
       next(ex);
@@ -90,14 +90,15 @@ const {
   });
   
   // retrieves entire cart with products for a specifc user
-  app.get('/api/carts/:id/cart_products', isLoggedIn, async(req, res, next)=> {
+  app.get('/api/users/:user_id/cart/products', isLoggedIn, async(req, res, next)=> {
     try {
-      if(req.params.id !== req.user.id){
+      if(req.params.user_id !== req.user.id){
         const error = Error('not authorized');
         error.status = 401;
         throw error;
       }
-      res.send(await fetchCartProducts(req.params.id));
+      const cartProducts = await fetchCartProducts(req.params.user_id);
+      res.json(cartProducts);
     }
     catch(ex){
       next(ex);
@@ -130,7 +131,7 @@ const {
 });
   
   // creates a product inside cart for a user
-  app.post('/api/carts/:id/cart_products', isLoggedIn, async(req, res, next)=> {
+  app.post('/api/users/:user_id/cart/products', isLoggedIn, async(req, res, next)=> {
     try {
       if(req.params.id !== req.user.id){
         const error = Error('not authorized');
@@ -145,7 +146,7 @@ const {
   });
 
   // edit cart - change quantity or remove product 0
-  app.put('/api/carts/:cart_id/cart_products/:id', isLoggedIn, async(req, res, next)=> {
+  app.put('/api/users/:user_id/cart/products/:product_id', isLoggedIn, async(req, res, next)=> {
     try {
       if(req.params.cart_id !== req.user.id){
         const error = Error('not authorized');
@@ -161,7 +162,7 @@ const {
   });
 
   // proceeds to checkout
-  app.post('/api/carts/:cart_id/checkout', isLoggedIn, async(req, res, next)=> {
+  app.post('/api/users/:user_id/cart/checkout', isLoggedIn, async(req, res, next)=> {
     try {
         if (req.params.cart_id !== req.user.id) {
             const error = Error('not authorized');
@@ -176,7 +177,7 @@ const {
 });
   
   // deletes a product from a cart of a user
-  app.delete('/api/carts/:cart_id/cart_products/:id', isLoggedIn, async(req, res, next)=> {
+  app.delete('/api/users/:user_id/cart/products/:product_id', isLoggedIn, async(req, res, next)=> {
     try {
       if(req.params.cart_id !== req.user.id){
         const error = Error('not authorized');
@@ -283,7 +284,8 @@ const {
     ]);
     // console.log(inCart);
 
-    console.log(await fetchCartProducts(moeCart.id));
+    console.log(await fetchCartProducts(moe.id));
+    // console.log(await fetchCartProducts(moeCart.id));
     // const cart_product = await createCartProduct({ cart_id: moe.id, product_id: tshirt.id });
 
     const port = process.env.PORT || 3000;

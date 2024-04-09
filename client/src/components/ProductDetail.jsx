@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_URL } from "../App";
 
-export default function ProductDetail() {
+export default function ProductDetail({ token, handleAddToCart }) {
     const { id } = useParams();
+    console.log("product ID:", id); // Log the id parameter
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,6 +28,10 @@ export default function ProductDetail() {
         fetchProduct();
     }, [id]);
 
+    const onAddToCartClick = () => {
+        handleAddToCart(id);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -44,6 +49,7 @@ export default function ProductDetail() {
                     <p>{product.description}</p>
                     <p>Price: ${product.price}</p>
                     <p>Inventory: {product.inventory}</p>
+                    <button onClick={onAddToCartClick}>Add to Cart</button>
                 </div>
             )}
         </div>

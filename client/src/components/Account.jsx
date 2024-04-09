@@ -11,7 +11,7 @@ export default function Account({ token }) {
             try {
                 const response = await fetch(`${API_URL}/api/auth/me`, {
                     headers: {
-                        Authorization: token
+                        Authorization: `Bearer ${token}`
                     }
                 });
                 if (!response.ok) {

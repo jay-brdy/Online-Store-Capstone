@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { API_URL } from "../App";
 
-export default function Login({ token, setToken }) {
+export default function Login({ token, setToken, userId, setUserId }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -21,6 +21,7 @@ export default function Login({ token, setToken }) {
             }
             const data = await response.json();
             setToken(data.token);
+            setUserId(data.user.id);
         } catch (error) {
             setError(error.message || 'An error occurred while logging in');
         }

@@ -1,7 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Navigations({ token, handleLogout }) {
-    const { id } = useParams();
 
     return (
         <div id="navbar">
@@ -30,7 +29,8 @@ export default function Navigations({ token, handleLogout }) {
             )}
             {token && (
               <div className="navbar-item">
-                  <Link to={`/carts/${id}`}>Cart</Link>
+                  {/* <Link to={`/users/${userId}/cart`}>Cart</Link> */}
+                  <Link to={`/cart`}>Cart</Link>
               </div>
             )}
             {token && (

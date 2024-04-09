@@ -69,14 +69,6 @@ const createProduct = async ({ name, description, price, inventory }) => {
 };
 
 const createCartProduct = async ({ cart_id, product_id, quantity }) => {
-    // check if a cart exists
-    // const cartExistsQuery = 'SELECT id FROM carts WHERE id = $1 AND user_id = $2';
-    // const cartExistsResult = await client.query(cartExistsQuery, [cart_id, user_id]);
-
-    // if (cartExistsResult.rows.length === 0) {
-    //     throw new Error('Cart does not exist');
-    // }
-
     const SQL = `
         INSERT INTO cart_products(id, cart_id, product_id, quantity) VALUES($1, $2, $3, $4) RETURNING *
     `;
@@ -140,11 +132,11 @@ const fetchUsers = async () => {
     return response.rows;
 };
 
-const fetchCarts = async (cart_id) => {
+const fetchCarts = async (user_id) => {
     const SQL = `
-        SELECT * FROM carts WHERE id = $1
+        SELECT * FROM carts WHERE user_id = $1
     `;
-    const response = await client.query(SQL, [cart_id]);
+    const response = await client.query(SQL, [user_id]);
     return response.rows[0];
 }
 
@@ -164,20 +156,22 @@ const fetchProductById = async (productId) => {
     return response.rows[0];
 };
 
-const fetchCartProducts = async (cart_id) => {
+const fetchCartProducts = async (user_id) => {
     const SQL = `
-        SELECT * FROM cart_products where cart_id = $1
+        SELECT cp.* FROM cart_products cp
+        JOIN carts c ON cp.cart_id = c.id
+        WHERE c.user_id = $1
     `;
-    const response = await client.query(SQL, [cart_id]);
+    const response = await client.query(SQL, [user_id]);
     return response.rows;
 };
 
-const checkoutCart = async (cart_id) => {
+const checkoutCart = async (user_id) => {
     const SQL = `
         DELETE FROM cart_products
-        WHERE cart_id = $1
+        WHERE cart_id IN (SELECT id FROM carts WHERE user_id = $1)
     `;
-    await client.query(SQL, [cart_id]);
+    await client.query(SQL, [user_id]);
 };
 
 const updateCartProductQuantity = async ({ cart_id, product_id, quantity }) => {

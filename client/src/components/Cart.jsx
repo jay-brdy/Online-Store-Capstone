@@ -1,26 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from "../App";
 
-// Define handleAddToCart function
-// export const handleAddToCart = async (userId, token, productId) => {
-//     try {
-//         const response = await fetch(`${API_URL}/api/users/${userId}/cart/products`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: `Bearer ${token}` 
-//             },
-//             body: JSON.stringify({ product_id: productId }) // Pass the product id to the server
-//         });
-//         if (!response.ok) {
-//             throw new Error('Failed to add product to cart');
-//         }
-//         alert('Product added to cart successfully!');
-//     } catch (error) {
-//         console.error('Error adding product to cart:', error);
-//     }
-// };
-
 // Define Cart component
 export default function Cart({ token, userId }) { 
     

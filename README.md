@@ -25,3 +25,4 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 * Allowing user's to edit their cart, edit quantity within the cart +/-, and removing items
 * Checkout page takes information for a successful checkout
 * Styling 
+

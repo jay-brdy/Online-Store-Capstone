@@ -140,8 +140,10 @@ const {
       }
       const cart = await fetchCarts(req.params.user_id);
       res.status(201).send(await createCartProduct({ 
-        cart_id: cart.id, 
-        product_id: req.body.product_id}));
+        user_id: cart.id, 
+        product_id: req.body.product_id,
+        quantity: req.body.quantity
+      }));
     }
     catch(ex){
       next(ex);
@@ -158,12 +160,16 @@ const {
       }
       const cart = await fetchCarts(req.params.user_id);
       const { quantity } = req.body;
-      await updateCartProductQuantity({
+      const updatedProduct = await updateCartProductQuantity({
           user_id: cart.id,
           product_id: req.params.product_id,
           quantity: quantity
       });
-      res.sendStatus(204);
+      if (!updatedProduct) {
+        res.sendStatus(404); // Send 404 if product not found in cart
+      } else {
+        res.sendStatus(204); // Send 204 if product quantity updated successfully
+    }
     } catch (ex) {
       next(ex);
     }
@@ -275,17 +281,17 @@ const {
 
     const inCart = await Promise.all([
       createCartProduct({
-         cart_id: moeCart.id,
+         user_id: moeCart.id,
          product_id: tshirt.id,
          quantity: 1
       }),
       createCartProduct({
-        cart_id: moeCart.id,
+        user_id: moeCart.id,
         product_id: jacket.id,
         quantity: 1
       }),
       createCartProduct({
-        cart_id: moeCart.id,
+        user_id: moeCart.id,
         product_id: hat.id,
         quantity: 2
       })

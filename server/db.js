@@ -68,11 +68,12 @@ const createProduct = async ({ name, description, price, inventory }) => {
     return response.rows[0];
 };
 
-const createCartProduct = async ({ cart_id, product_id, quantity }) => {
+const createCartProduct = async ({ user_id, product_id, quantity }) => {
     const SQL = `
         INSERT INTO cart_products(id, cart_id, product_id, quantity) VALUES($1, $2, $3, $4) RETURNING *
     `;
-    const response = await client.query(SQL, [uuid.v4(), cart_id, product_id, quantity]);
+    const response = await client.query(SQL, [uuid.v4(), user_id, product_id, quantity]);
+    console.log(response.rows[0]);
     return response.rows[0];
 };
 

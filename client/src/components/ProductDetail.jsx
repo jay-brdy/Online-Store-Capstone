@@ -30,6 +30,10 @@ export default function ProductDetail({ token, userId }) {
 
     const addToCart = async () => {
         try {
+            if (!token) {
+                throw new Error('Failed - Please log in to add items in your cart!');
+            }
+
             const response = await fetch(`${API_URL}/api/users/${userId}/cart/products/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -41,8 +45,21 @@ export default function ProductDetail({ token, userId }) {
                     product_id: id 
                  })
             });
-            if (!response.ok) {
-                throw new Error('Failed - Please log in!');
+            if (response.status === 404) {
+                // If item not found in cart, use POST instead of PUT
+                await fetch(`${API_URL}/api/users/${userId}/cart/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        quantity: 1,
+                        product_id: id 
+                    })
+                });
+            } else if (!response.ok) {
+                throw new Error('Failed to add item to cart!');
             }
             // Display a success alert
             alert('Product added to cart successfully!');

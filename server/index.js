@@ -133,28 +133,36 @@ const {
   // creates a product inside cart for a user
   app.post('/api/users/:user_id/cart/products', isLoggedIn, async(req, res, next)=> {
     try {
-      if(req.params.id !== req.user.id){
+      if(req.params.user_id !== req.user.id){
         const error = Error('not authorized');
         error.status = 401;
         throw error;
       }
-      res.status(201).send(await createCartProduct({ cart_id: req.params.id, product_id: req.body.product_id}));
+      const cart = await fetchCarts(req.params.user_id);
+      res.status(201).send(await createCartProduct({ 
+        cart_id: cart.id, 
+        product_id: req.body.product_id}));
     }
     catch(ex){
       next(ex);
     }
   });
 
-  // edit cart - change quantity or remove product 0
+  // update cart
   app.put('/api/users/:user_id/cart/products/:product_id', isLoggedIn, async(req, res, next)=> {
     try {
-      if(req.params.cart_id !== req.user.id){
-        const error = Error('not authorized');
+      if (req.params.user_id !== req.user.id) {
+        const error = Error('Not authorized');
         error.status = 401;
         throw error;
       }
+      const cart = await fetchCarts(req.params.user_id);
       const { quantity } = req.body;
-      await updateCartProductQuantity({ cart_id: req.params.cart_id, product_id: req.params.id, quantity });
+      await updateCartProductQuantity({
+          user_id: cart.id,
+          product_id: req.params.product_id,
+          quantity: quantity
+      });
       res.sendStatus(204);
     } catch (ex) {
       next(ex);

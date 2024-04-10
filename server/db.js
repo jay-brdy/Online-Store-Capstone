@@ -176,14 +176,15 @@ const checkoutCart = async (user_id) => {
     await client.query(SQL, [user_id]);
 };
 
-const updateCartProductQuantity = async ({ cart_id, product_id, quantity }) => {
+const updateCartProductQuantity = async ({ user_id, product_id, quantity }) => {
     const SQL = `
         UPDATE cart_products 
-        SET quantity = $1 
+        SET quantity = $1 + quantity 
         WHERE cart_id = $2 AND product_id = $3
         RETURNING *;
     `;
-    const response = await client.query(SQL, [quantity, cart_id, product_id]);
+    const response = await client.query(SQL, [quantity, user_id, product_id]);
+    console.log(response.rows[0]);
     return response.rows[0];
 };
 

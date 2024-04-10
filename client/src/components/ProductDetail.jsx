@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { API_URL } from "../App";
 import Button from '@mui/material/Button';
 
-export default function ProductDetail({ token, handleAddToCart }) {
+export default function ProductDetail({ token, userId }) {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -28,8 +28,28 @@ export default function ProductDetail({ token, handleAddToCart }) {
         fetchProduct();
     }, [id]);
 
-    const onAddToCartClick = () => {
-        handleAddToCart(id);
+    const addToCart = async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/users/${userId}/cart/products/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    quantity: 1,
+                    product_id: id 
+                 })
+            });
+            if (!response.ok) {
+                throw new Error('Failed - Please log in!');
+            }
+            // Display a success alert
+            alert('Product added to cart successfully!');
+        }       
+        catch(error) {
+            setError(error.message || 'Failed to add to cart!');
+        }
     };
 
     if (loading) {
@@ -49,9 +69,8 @@ export default function ProductDetail({ token, handleAddToCart }) {
                     <p>{product.description}</p>
                     <p>Price: ${product.price}</p>
                     <p>Inventory: {product.inventory}</p>
-                    <button onClick={onAddToCartClick}>Add to Cart</button>
-                    <Button variant="contained" color="primary" onClick={onAddToCartClick}>
-                    Add to Cart
+                    <Button variant="contained" color="primary" onClick={addToCart}>
+                        Add to Cart
                     </Button>
                 </div>
             )}

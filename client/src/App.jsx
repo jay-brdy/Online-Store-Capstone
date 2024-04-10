@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Account from './components/Account';
 import Cart from './components/Cart';
-import { handleAddToCart } from './components/Cart';
+
 
 function App() {
   const [token, setToken] = useState(null);
@@ -38,8 +38,7 @@ function App() {
           <Route path="/login" element={<Login token={token} setToken={handleTokenUpdate} userId={userId} setUserId={handleUserIdUpdate} />} />
           <Route path="/register" element={<Register token={token} setToken={handleTokenUpdate} />} />
           <Route path="/account" element={token ? <Account token={token} setToken={handleTokenUpdate} /> : <Navigate to="/login" />} />
-          <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate} handleAddToCart={handleAddToCart} />} />
-          {/* <Route path="/users/:user_id/cart" element={<Cart token={token} setToken={handleTokenUpdate } />} /> */}
+          <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate}  userId={userId} setUserId={handleUserIdUpdate} />} />
           <Route path="/cart" element={<Cart token={token} setToken={handleTokenUpdate} userId={userId} />} />
         </Routes>
       </Router>

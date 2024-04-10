@@ -68,11 +68,12 @@ const createProduct = async ({ name, description, price, inventory }) => {
     return response.rows[0];
 };
 
-const createCartProduct = async ({ cart_id, product_id, quantity }) => {
+const createCartProduct = async ({ user_id, product_id, quantity }) => {
     const SQL = `
         INSERT INTO cart_products(id, cart_id, product_id, quantity) VALUES($1, $2, $3, $4) RETURNING *
     `;
-    const response = await client.query(SQL, [uuid.v4(), cart_id, product_id, quantity]);
+    const response = await client.query(SQL, [uuid.v4(), user_id, product_id, quantity]);
+    console.log(response.rows[0]);
     return response.rows[0];
 };
 
@@ -158,9 +159,11 @@ const fetchProductById = async (productId) => {
 
 const fetchCartProducts = async (user_id) => {
     const SQL = `
-        SELECT cp.* FROM cart_products cp
-        JOIN carts c ON cp.cart_id = c.id
-        WHERE c.user_id = $1
+        SELECT cart_products.*, products.name, products.description, products.price, cart_products.quantity
+        FROM cart_products
+        JOIN carts ON cart_products.cart_id = carts.id
+        JOIN products ON cart_products.product_id = products.id
+        WHERE carts.user_id = $1
     `;
     const response = await client.query(SQL, [user_id]);
     return response.rows;
@@ -174,14 +177,15 @@ const checkoutCart = async (user_id) => {
     await client.query(SQL, [user_id]);
 };
 
-const updateCartProductQuantity = async ({ cart_id, product_id, quantity }) => {
+const updateCartProductQuantity = async ({ user_id, product_id, quantity }) => {
     const SQL = `
         UPDATE cart_products 
-        SET quantity = $1 
+        SET quantity = $1 + quantity 
         WHERE cart_id = $2 AND product_id = $3
         RETURNING *;
     `;
-    const response = await client.query(SQL, [quantity, cart_id, product_id]);
+    const response = await client.query(SQL, [quantity, user_id, product_id]);
+    console.log(response.rows[0]);
     return response.rows[0];
 };
 

@@ -14,7 +14,14 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 * View products without logging in
 * Register for an account
 * Log in
+* User's are able to log out
 * Access their account details
 * View their cart
 * Add items to their cart
 * Quantity is updated in cart
+
+4/10/2024 Working on...
+* Checkout page form to take customer billing info 
+* Allowing user's to edit their cart, edit quantity within the cart +/-, and removing items
+* Checkout page takes information for a successful checkout
+* Styling 

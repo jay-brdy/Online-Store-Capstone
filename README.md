@@ -17,3 +17,4 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 * Access their account details
 * View their cart
 * Add items to their cart
+* Quantity is updated in cart

@@ -49,13 +49,17 @@ export default function Cart({ token, userId }) {
     return (
         <div>
             <h2>Cart</h2>
-            {cartProducts.map(product => (
-                <div key={product.id}>
-                    <h3>{product.name}</h3>
-                    <p>Quantity: {product.quantity}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+            {cartProducts.length === 0 ? (
+                <h3>Your cart is currently empty.</h3>
+            ) : (
+                cartProducts.map(product => (
+                    <div key={product.id}>
+                        <h3>{product.name}</h3>
+                        <p>Quantity: {product.quantity}</p>
+                        <p>Price: ${product.price}</p>
+                    </div>
+                ))
+            )}
             {cartProducts.length > 0 && (
                 <Link to="/checkout">
                     <Button variant="contained" color="primary">
@@ -64,5 +68,5 @@ export default function Cart({ token, userId }) {
                 </Link>
             )}
         </div>
-    );
+);
 }

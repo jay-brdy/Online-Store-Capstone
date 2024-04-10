@@ -29,7 +29,6 @@ export default function Navigations({ token, handleLogout }) {
             )}
             {token && (
               <div className="navbar-item">
-                  {/* <Link to={`/users/${userId}/cart`}>Cart</Link> */}
                   <Link to={`/cart`}>Cart</Link>
               </div>
             )}

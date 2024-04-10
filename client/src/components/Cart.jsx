@@ -34,10 +34,6 @@ export default function Cart({ token, userId }) {
         fetchCart();
     }, [userId, token]); 
 
-    const handleCheckout = () => {
-        setShowCheckoutForm(true);
-    };
-
     if (loading) {
         return <div>Loading...</div>;
     }

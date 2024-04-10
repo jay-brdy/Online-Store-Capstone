@@ -9,3 +9,11 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 4/3/2024 Working towards MVP (Minimum Viable Product).
 
 4/4/2024 Working on getting cart function to properly work and access user's carts. 
+
+4/9/2024 User's are now able to:
+* View products without logging in
+* Register for an account
+* Log in
+* Access their account details
+* View their cart
+* Add items to their cart

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { API_URL } from "../App";
+import Button from '@mui/material/Button';
 
 // Define Cart component
 export default function Cart({ token, userId }) { 
@@ -32,6 +34,10 @@ export default function Cart({ token, userId }) {
         fetchCart();
     }, [userId, token]); 
 
+    const handleCheckout = () => {
+        setShowCheckoutForm(true);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -50,6 +56,13 @@ export default function Cart({ token, userId }) {
                     <p>Price: ${product.price}</p>
                 </div>
             ))}
+            {cartProducts.length > 0 && (
+                <Link to="/checkout">
+                    <Button variant="contained" color="primary">
+                        Check Out
+                    </Button>
+                </Link>
+            )}
         </div>
     );
 }

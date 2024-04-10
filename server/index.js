@@ -183,7 +183,7 @@ const {
             error.status = 401;
             throw error;
         }
-        await checkoutCart(req.params.cart_id);
+        await checkoutCart(req.params.user_id);
         res.send({ message: 'Checkout successful!' });
     } catch(ex) {
         next(ex);

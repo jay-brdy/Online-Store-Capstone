@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Account from './components/Account';
 import Cart from './components/Cart';
+import CheckoutForm from './components/Checkout';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/account" element={token ? <Account token={token} setToken={handleTokenUpdate} /> : <Navigate to="/login" />} />
           <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate}  userId={userId} setUserId={handleUserIdUpdate} />} />
           <Route path="/cart" element={<Cart token={token} setToken={handleTokenUpdate} userId={userId} />} />
+          <Route path="/checkout" element={<CheckoutForm token={token} setToken={handleTokenUpdate} userId={userId} />} />
         </Routes>
       </Router>
     </>

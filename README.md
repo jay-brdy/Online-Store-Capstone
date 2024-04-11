@@ -22,7 +22,11 @@ Updated 4/10/2024: User's are now able to:
 * Allowing user's to edit their cart, edit quantity within the cart +/-, and removing items
 * Cart shows price total
 * Styling 
+
+Future additions...
 * Adding new items and pictures!
+* Added orders and order_items to backend table to keep track of orders
 * Checkout page gives unique order number/id
 * Account page shows previous orders
+* 
 

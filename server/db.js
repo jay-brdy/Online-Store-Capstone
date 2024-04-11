@@ -73,7 +73,7 @@ const createCartProduct = async ({ user_id, product_id, quantity }) => {
         INSERT INTO cart_products(id, cart_id, product_id, quantity) VALUES($1, $2, $3, $4) RETURNING *
     `;
     const response = await client.query(SQL, [uuid.v4(), user_id, product_id, quantity]);
-    console.log(response.rows[0]);
+    console.log(response.rows[0]); // DELETE LATER
     return response.rows[0];
 };
 
@@ -185,7 +185,7 @@ const updateCartProductQuantity = async ({ user_id, product_id, quantity }) => {
         RETURNING *;
     `;
     const response = await client.query(SQL, [quantity, user_id, product_id]);
-    console.log(response.rows[0]);
+    console.log(response.rows[0]); // DELETE LATER
     return response.rows[0];
 };
 

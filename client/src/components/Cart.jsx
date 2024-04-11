@@ -1,25 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { API_URL } from "../App";
-
-// Define handleAddToCart function
-// export const handleAddToCart = async (userId, token, productId) => {
-//     try {
-//         const response = await fetch(`${API_URL}/api/users/${userId}/cart/products`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: `Bearer ${token}` 
-//             },
-//             body: JSON.stringify({ product_id: productId }) // Pass the product id to the server
-//         });
-//         if (!response.ok) {
-//             throw new Error('Failed to add product to cart');
-//         }
-//         alert('Product added to cart successfully!');
-//     } catch (error) {
-//         console.error('Error adding product to cart:', error);
-//     }
-// };
+import Button from '@mui/material/Button';
 
 // Define Cart component
 export default function Cart({ token, userId }) { 
@@ -63,13 +45,24 @@ export default function Cart({ token, userId }) {
     return (
         <div>
             <h2>Cart</h2>
-            {cartProducts.map(product => (
-                <div key={product.id}>
-                    <h3>{product.name}</h3>
-                    <p>Quantity: {product.quantity}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+            {cartProducts.length === 0 ? (
+                <h3>Your cart is currently empty.</h3>
+            ) : (
+                cartProducts.map(product => (
+                    <div key={product.id}>
+                        <h3>{product.name}</h3>
+                        <p>Quantity: {product.quantity}</p>
+                        <p>Price: ${product.price}</p>
+                    </div>
+                ))
+            )}
+            {cartProducts.length > 0 && (
+                <Link to="/checkout">
+                    <Button variant="contained" color="primary">
+                        Check Out
+                    </Button>
+                </Link>
+            )}
         </div>
-    );
+);
 }

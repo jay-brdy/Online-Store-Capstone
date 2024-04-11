@@ -178,12 +178,12 @@ const {
   // proceeds to checkout
   app.post('/api/users/:user_id/cart/checkout', isLoggedIn, async(req, res, next)=> {
     try {
-        if (req.params.cart_id !== req.user.id) {
+        if (req.params.user_id !== req.user.id) {
             const error = Error('not authorized');
             error.status = 401;
             throw error;
         }
-        await checkoutCart(req.params.cart_id);
+        await checkoutCart(req.params.user_id);
         res.send({ message: 'Checkout successful!' });
     } catch(ex) {
         next(ex);

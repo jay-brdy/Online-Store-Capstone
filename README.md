@@ -6,11 +6,7 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 
 4/3/2024 Initially forked FE from [Jeremy's repo](https://github.com/FullstackAcademy/2302-ACC-Capstone-FE), restarted capstone using Unit4 Career Sim as a guideline. Using inspiration from Unit3 Career Sim (Book Buddy). 
 
-4/3/2024 Working towards MVP (Minimum Viable Product).
-
-4/4/2024 Working on getting cart function to properly work and access user's carts. 
-
-4/9/2024 User's are now able to:
+Updated 4/10/2024: User's are now able to:
 * View products without logging in
 * Register for an account
 * Log in
@@ -19,10 +15,18 @@ View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4
 * View their cart
 * Add items to their cart
 * Quantity is updated in cart
+* Checkout page form to take customer billing info 
+* Checkout page takes information for a successful checkout
 
 4/10/2024 Working on...
-* Checkout page form to take customer billing info 
 * Allowing user's to edit their cart, edit quantity within the cart +/-, and removing items
-* Checkout page takes information for a successful checkout
+* Cart shows price total
 * Styling 
+
+Future additions...
+* Adding new items and pictures!
+* Added orders and order_items to backend table to keep track of orders
+* Checkout page gives unique order number/id
+* Account page shows previous orders
+* 
 

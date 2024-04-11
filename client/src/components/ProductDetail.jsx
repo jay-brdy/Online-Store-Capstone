@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_URL } from "../App";
 import Button from '@mui/material/Button';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function ProductDetail({ token, userId }) {
     const { id } = useParams();
@@ -86,7 +87,7 @@ export default function ProductDetail({ token, userId }) {
                     <p>{product.description}</p>
                     <p>Price: ${product.price}</p>
                     <p>Inventory: {product.inventory}</p>
-                    <Button variant="contained" color="primary" onClick={addToCart}>
+                    <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={addToCart}>
                         Add to Cart
                     </Button>
                 </div>

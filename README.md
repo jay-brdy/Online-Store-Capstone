@@ -18,9 +18,10 @@ Updated 4/11/2024: User's are now able to:
 * Checkout page form to take customer billing info 
 * Checkout page takes information for a successful checkout
 * Users can edit quantity within the cart +/- and remove items
+* Cart shows price total
 
 4/11/2024 Working on...
-* Cart shows price total
+* Sort products on home page
 * Styling 
 
 Future additions...

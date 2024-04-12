@@ -19,13 +19,15 @@ Updated 4/11/2024: User's are now able to:
 * Checkout page takes information for a successful checkout
 * Users can edit quantity within the cart +/- and remove items
 * Cart shows price total
+* Sort products on home page by name and price
+* Search products by name and/or description
 
 4/11/2024 Working on...
-* Sort products on home page
+* Making site accessible online
 * Styling 
+* Adding new items and pictures!
 
 Future additions...
-* Adding new items and pictures!
 * Add orders and order_items to backend table to keep track of orders
 * Adding a Thank You For Order page that gives unique order number/id
 * Account page shows previous orders

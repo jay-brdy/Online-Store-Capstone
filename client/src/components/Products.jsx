@@ -28,12 +28,12 @@ export default function Products() {
         fetchProducts();
     }, []);
 
-
     // using useMemo to memorize the refult of filtering and sorting if both are utilized
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = [...products];
 
         // Filter products based on the filter/search criteria
+        // Filter not case sensitive
         if (filter) {
             filtered = filtered.filter(product =>
                 product.name.toLowerCase().includes(filter.toLowerCase()) ||

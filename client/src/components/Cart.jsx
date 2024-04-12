@@ -8,6 +8,7 @@ export default function Cart({ token, userId }) {
     const [cartProducts, setCartProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const fetchCart = async () => {
         try {
@@ -96,6 +97,15 @@ export default function Cart({ token, userId }) {
         }
     };
 
+    useEffect(() => {
+        // Calculate total price whenever cartProducts change
+        let totalPrice = 0;
+        cartProducts.forEach(product => {
+            totalPrice += product.quantity * product.price;
+        });
+        setTotalPrice(totalPrice);
+    }, [cartProducts]);
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -140,10 +150,13 @@ export default function Cart({ token, userId }) {
                             onClick={() => removeFromCart(product.product_id)}
                         >
                             Remove
-                        </Button>
+                        </Button> 
                     </div>
                 ))
             )}
+            {/* Display total price */}
+            <h3>Total: ${totalPrice}</h3>
+            
             {cartProducts.length > 0 && (
                 <Link to="/checkout">
                     <Button variant="contained" color="primary">

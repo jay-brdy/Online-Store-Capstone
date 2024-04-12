@@ -141,9 +141,6 @@ export default function Cart({ token, userId }) {
                         >
                             Remove
                         </Button>
-
-                        {/* TESTING DELETE LATER!!! */}
-                        <p>Id: {product.product_id}</p>
                     </div>
                 ))
             )}

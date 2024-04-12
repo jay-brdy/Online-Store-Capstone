@@ -153,6 +153,7 @@ const {
   // update cart
   app.put('/api/users/:user_id/cart/products/:product_id', isLoggedIn, async(req, res, next)=> {
     try {
+      console.log("product_id:", req.params.product_id); // DELETE LATER
       if (req.params.user_id !== req.user.id) {
         const error = Error('Not authorized');
         error.status = 401;
@@ -193,12 +194,15 @@ const {
   // deletes a product from a cart of a user
   app.delete('/api/users/:user_id/cart/products/:product_id', isLoggedIn, async(req, res, next)=> {
     try {
-      if(req.params.cart_id !== req.user.id){
+      if(req.params.user_id !== req.user.id){
         const error = Error('not authorized');
         error.status = 401;
         throw error;
       }
-      await destroyCartProduct({cart_id: req.params.cart_id, id: req.params.id });
+      const cart = await fetchCarts(req.params.user_id); // Fetch cart using user_id
+      await destroyCartProduct({
+        cart_id: cart.id, 
+        product_id: req.params.product_id });
       res.sendStatus(204);
     }
     catch(ex){
@@ -268,8 +272,8 @@ const {
       })
     ]);
   
-    console.log(await fetchUsers());
-    console.log(await fetchProducts());
+    console.log('Users: ', await fetchUsers());
+    console.log('Products: ', await fetchProducts());
   
     const [moeCart, lucyCart, chauCart, jayCart] = await Promise.all([
       createCart({ user_id: moe.id }),
@@ -277,7 +281,7 @@ const {
       createCart({ user_id: chau.id }),
       createCart({ user_id: jay.id })
     ]);
-    console.log(await fetchCarts());
+    console.log('Carts: ', await fetchCarts());
 
     const inCart = await Promise.all([
       createCartProduct({
@@ -296,11 +300,8 @@ const {
         quantity: 2
       })
     ]);
-    // console.log(inCart);
 
-    console.log(await fetchCartProducts(moe.id));
-    // console.log(await fetchCartProducts(moeCart.id));
-    // const cart_product = await createCartProduct({ cart_id: moe.id, product_id: tshirt.id });
+    console.log('Moes cart: ', await fetchCartProducts(moe.id));
 
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));

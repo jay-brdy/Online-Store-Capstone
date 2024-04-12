@@ -77,11 +77,20 @@ const createCartProduct = async ({ user_id, product_id, quantity }) => {
     return response.rows[0];
 };
 
-const destroyCartProduct = async ({ cart_id, id }) => {
+const destroyCartProduct = async ({ cart_id, product_id }) => {
+    console.log('Received cart_id:', cart_id);
+    console.log('Received product_id:', product_id);
     const SQL = `
-        DELETE FROM cart_products WHERE cart_id=$1 AND id=$2
+        DELETE 
+        FROM cart_products 
+        WHERE cart_id=$1 AND product_id=$2
+        RETURNING *
     `;
-    await client.query(SQL, [cart_id, id]);
+    console.log("SQL query:", SQL); // DELETE LATER
+    const response = await client.query(SQL, [cart_id, product_id]);
+    console.log(response.rows[0]); // DELETE LATER
+    return response.rows[0];
+    
 };
 
 const authenticate = async ({ username, password }) => {
@@ -174,7 +183,9 @@ const checkoutCart = async (user_id) => {
         DELETE FROM cart_products
         WHERE cart_id IN (SELECT id FROM carts WHERE user_id = $1)
     `;
-    await client.query(SQL, [user_id]);
+    const response = await client.query(SQL, [user_id]);
+    console.log(response.rows[0]); // DELETE LATER
+    return response.rows;
 };
 
 const updateCartProductQuantity = async ({ user_id, product_id, quantity }) => {
@@ -184,6 +195,7 @@ const updateCartProductQuantity = async ({ user_id, product_id, quantity }) => {
         WHERE cart_id = $2 AND product_id = $3
         RETURNING *;
     `;
+    console.log("SQL query:", SQL); // DELETE LATER
     const response = await client.query(SQL, [quantity, user_id, product_id]);
     console.log(response.rows[0]); // DELETE LATER
     return response.rows[0];

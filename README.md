@@ -1,12 +1,15 @@
 # Full Stack Academy Capstone - Final Project
-## Online Store
+## Jay's Fishing Market! 
+
+View my live website [here](https://jays-fishing-market.netlify.app)! 
 
 View my wireframe using Figma [here](https://www.figma.com/file/gaF3tD8S8R3tP2W4P4gk8C/jay-brdy's-Wireframe-for-Capstone-Project?type=whiteboard&node-id=0%3A1&t=cKUICFxSR8Jok0he-1)!
 
+Rendered my backend [here](https://jays-fishing-market.onrender.com/api/products)
 
-4/3/2024 Initially forked FE from [Jeremy's repo](https://github.com/FullstackAcademy/2302-ACC-Capstone-FE), restarted capstone using Unit4 Career Sim as a guideline. Using inspiration from Unit3 Career Sim (Book Buddy). 
-
-Updated 4/11/2024: User's are now able to:
+## What's new...
+View my backend database via 
+Updated 4/13/2024: User's are now able to:
 * View products without logging in
 * Register for an account
 * Log in
@@ -21,9 +24,10 @@ Updated 4/11/2024: User's are now able to:
 * Cart shows price total
 * Sort products on home page by name and price
 * Search products by name and/or description
+* Site accessible online
 
-4/11/2024 Working on...
-* Making site accessible online
+## Plans for future updates...
+Updated 4/13/2024 Working on...
 * Styling 
 * Adding new items and pictures!
 

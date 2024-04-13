@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navigations from "./components/Navigations"
 import Products from './components/Products';
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      <h1>Jay's Online Store</h1>
+      <h1>Jay's Fishing Market</h1>
       
       <Router>
         <Navigations token={token} handleLogout={handleLogout} userId={userId} />
@@ -49,4 +49,4 @@ function App() {
 }
 
 export default App;
-export const API_URL = "http://localhost:3000";
+export const API_URL = "https://jays-fishing-market.onrender.com";

@@ -86,7 +86,7 @@ export default function ProductDetail({ token, userId }) {
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <p>Price: ${product.price}</p>
-                    <p>Inventory: {product.inventory}</p>
+                    <p>Size: {product.size}</p>
                     <Button variant="contained" startIcon={<AddShoppingCartIcon />} onClick={addToCart}>
                         Add to Cart
                     </Button>

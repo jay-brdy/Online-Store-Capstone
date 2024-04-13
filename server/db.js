@@ -30,6 +30,7 @@ const createTables = async () => {
             name VARCHAR(50),
             description VARCHAR(255),
             price NUMERIC(7,2),
+            size INTEGER,
             inventory INTEGER
         );
         CREATE TABLE cart_products(
@@ -60,11 +61,11 @@ const createCart = async ({ user_id }) => {
 
 }
 
-const createProduct = async ({ name, description, price, inventory }) => {
+const createProduct = async ({ name, description, price, size, inventory }) => {
     const SQL = `
-        INSERT INTO products(id, name, description, price, inventory) VALUES($1, $2, $3, $4, $5) RETURNING *
+        INSERT INTO products(id, name, description, price, size, inventory) VALUES($1, $2, $3, $4, $5, $6) RETURNING *
     `;
-    const response = await client.query(SQL, [uuid.v4(), name, description, price, inventory]);
+    const response = await client.query(SQL, [uuid.v4(), name, description, price, size, inventory]);
     return response.rows[0];
 };
 
@@ -168,7 +169,7 @@ const fetchProductById = async (productId) => {
 
 const fetchCartProducts = async (user_id) => {
     const SQL = `
-        SELECT cart_products.*, products.name, products.description, products.price, cart_products.quantity
+        SELECT cart_products.*, products.name, products.description, products.price, products.size, cart_products.quantity
         FROM cart_products
         JOIN carts ON cart_products.cart_id = carts.id
         JOIN products ON cart_products.product_id = products.id

@@ -1,5 +1,5 @@
 const pg = require('pg');
-const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/acme_online_store_db');
+const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/jays_fishing_market_db');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

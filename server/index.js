@@ -28,7 +28,7 @@ const {
   app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../client/dist/index.html')));
   app.use('/assets', express.static(path.join(__dirname, '../client/dist/assets'))); 
   app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+    origin: ['https://jays-fishing-market.netlify.app'],
     methods: ['GET', 'POST', 'PUT','DELETE'],
     credentials: true,
     withCredentials: true,

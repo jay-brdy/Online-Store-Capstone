@@ -50,6 +50,10 @@ export default function Products() {
             filtered.sort((a, b) => a.price - b.price);
         } else if (sortOrder === "priceDesc") {
             filtered.sort((a, b) => b.price - a.price);
+        } else if (sortOrder === "sizeAsc") {
+            filtered.sort((a, b) => a.size - b.size);
+        } else if (sortOrder === "sizeDesc") {
+            filtered.sort((a, b) => b.size - a.size);
         }
 
         return filtered;
@@ -82,6 +86,8 @@ export default function Products() {
                     <option value="za">Name Z-A</option>
                     <option value="priceAsc">Price: Low to High</option>
                     <option value="priceDesc">Price: High to Low</option>
+                    <option value="sizeAsc">Size: Small to Big</option>
+                    <option value="sizeDesc">Size: Big to Small</option>
                 </select>
             </div>
             <input
@@ -95,7 +101,7 @@ export default function Products() {
                     <h3>
                         <Link to={`/products/${product.id}`}>{product.name}</Link>
                     </h3>
-                    <p>{product.description}</p>
+                    <p>Size: {product.size}</p>
                     <p>Price: ${product.price}</p>
                 </div>
             ))}

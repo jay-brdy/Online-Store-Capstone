@@ -83,6 +83,7 @@ export default function ProductDetail({ token, userId }) {
             <h2>Product Detail</h2>
             {product && (
                 <div>
+                    <img src={product.imageurl} alt="product image" />
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <p>Size: {product.size}</p>

@@ -1,10 +1,21 @@
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
+  margin: 40px;
+  margin-left: 250px;
+  margin-right: 250px;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 #logo-image {
   width: 250px;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 7rem;
+  margin-top: 30px;
 }

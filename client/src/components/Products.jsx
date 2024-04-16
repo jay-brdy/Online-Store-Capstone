@@ -96,15 +96,17 @@ export default function Products() {
                 value={filter}
                 onChange={handleFilterChange}
             />
-            {filteredAndSortedProducts.map(product => (
-                <div key={product.id}>
-                    <h3>
-                        <Link to={`/products/${product.id}`}>{product.name}</Link>
-                    </h3>
-                    <p>Size: {product.size}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+            <div className="products-grid">
+                {filteredAndSortedProducts.map(product => (
+                    <div id="product-item" key={product.id}>
+                        <h3>
+                            <Link to={`/products/${product.id}`}>{product.name}</Link>
+                        </h3>
+                        <p>Size: {product.size}</p>
+                        <p>Price: ${product.price}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

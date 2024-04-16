@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
+import marketLogo from '../assets/jaysfishingmarket_logo.png';
 
 export default function Navigations({ token, handleLogout }) {
 
     return (
-        <div id="navbar">
-
-            <div className="navbar-item">
-                <Link to="/">Home</Link>
-            </div>
+      <header>
+      <div id="navbar">
+          {/* Logo as the header */}
+          <div className="navbar-item">
+              <Link to="/">
+                  <img id="logo-image" src={marketLogo} alt="Jay's Fishing Market" style={{ display: "block", margin: "0 auto" }} />
+              </Link>
+          </div>
 
             {/* navigation bar when not logged in */}
             {!token && (
@@ -38,6 +42,7 @@ export default function Navigations({ token, handleLogout }) {
               </div>
             )}
         </div>
+      </header>
     );
 }
 

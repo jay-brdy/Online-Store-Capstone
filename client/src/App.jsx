@@ -29,8 +29,6 @@ function App() {
 
   return (
     <>
-      <h1>Jay's Fishing Market</h1>
-      
       <Router>
         <Navigations token={token} handleLogout={handleLogout} userId={userId} />
 
@@ -39,7 +37,7 @@ function App() {
           <Route path="/login" element={<Login token={token} setToken={handleTokenUpdate} userId={userId} setUserId={handleUserIdUpdate} />} />
           <Route path="/register" element={<Register token={token} setToken={handleTokenUpdate} />} />
           <Route path="/account" element={token ? <Account token={token} setToken={handleTokenUpdate} /> : <Navigate to="/login" />} />
-          <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate}  userId={userId} setUserId={handleUserIdUpdate} />} />
+          <Route path="/products/:id" element={<ProductDetail token={token} setToken={handleTokenUpdate} userId={userId} setUserId={handleUserIdUpdate} />} />
           <Route path="/cart" element={<Cart token={token} setToken={handleTokenUpdate} userId={userId} />} />
           <Route path="/checkout" element={<CheckoutForm token={token} setToken={handleTokenUpdate} userId={userId} />} />
         </Routes>
@@ -49,7 +47,7 @@ function App() {
 }
 
 export default App;
-export const API_URL = "https://jays-fishing-market.onrender.com";
+// export const API_URL = "https://jays-fishing-market.onrender.com";
 
 // using localhost to test locally - comment out when not testing
-// export const API_URL = "http://localhost:3000";
+export const API_URL = "http://localhost:3000";

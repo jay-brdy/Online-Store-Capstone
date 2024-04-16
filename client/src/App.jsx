@@ -47,7 +47,7 @@ function App() {
 }
 
 export default App;
-// export const API_URL = "https://jays-fishing-market.onrender.com";
+export const API_URL = "https://jays-fishing-market.onrender.com";
 
 // using localhost to test locally - comment out when not testing
-export const API_URL = "http://localhost:3000";
+// export const API_URL = "http://localhost:3000";

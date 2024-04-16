@@ -3,9 +3,25 @@ body {
   margin-left: 250px;
   margin-right: 250px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+}
+
+#navbar {
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.3); /* shadow for a subtle effect at bottom only*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-item {
+  margin-left: 10px;
+}
+
+.navbar-logo {
+  flex: 1; /* Let the logo take up available space */
+  text-align: center; /* Center the logo */
+  margin-left: 5rem;
 }
 
 #logo-image {
@@ -18,4 +34,20 @@ body {
   justify-content: space-around;
   gap: 7rem;
   margin-top: 30px;
+}
+
+/* remove hyperlink look */
+.product-name a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+
+.product-image {
+  height: 110px;
+}
+
+.search-and-sort {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 import { API_URL } from "../App";
+import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
 export default function Products() {
     const [products, setProducts] = useState([]);
@@ -78,8 +80,30 @@ export default function Products() {
     return (
         <div>
             <h2>Products</h2>
-            <div>
-                <label htmlFor="sort">Sort By:</label>
+
+            {/* <input
+                type="text"
+                placeholder="Search..."
+                value={filter}
+                onChange={handleFilterChange}
+                using MUI instead below
+            /> */}
+
+            <div className="search-and-sort">
+                <TextField
+                    placeholder="Search..."
+                    value={filter}
+                    onChange={handleFilterChange}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+
+                {/* <label htmlFor="sort">Sort By:</label>
                 <select id="sort" value={sortOrder} onChange={handleSortChange}>
                     <option value="default">Default</option>
                     <option value="az">Name A-Z</option>
@@ -88,23 +112,44 @@ export default function Products() {
                     <option value="priceDesc">Price: High to Low</option>
                     <option value="sizeAsc">Size: Small to Big</option>
                     <option value="sizeDesc">Size: Big to Small</option>
-                </select>
+                </select> 
+                using MUI instead below
+                */}
+                <FormControl>
+                    <InputLabel id="sort-label">Sort By:</InputLabel>
+                    <Select
+                        labelId="sort-label"
+                        id="sort"
+                        value={sortOrder}
+                        onChange={handleSortChange}
+                    >
+                        <MenuItem value="default">Default</MenuItem>
+                        <MenuItem value="az">Name A-Z</MenuItem>
+                        <MenuItem value="za">Name Z-A</MenuItem>
+                        <MenuItem value="priceAsc">Price: Low to High</MenuItem>
+                        <MenuItem value="priceDesc">Price: High to Low</MenuItem>
+                        <MenuItem value="sizeAsc">Size: Small to Big</MenuItem>
+                        <MenuItem value="sizeDesc">Size: Big to Small</MenuItem>
+                    </Select>
+                </FormControl>
             </div>
-            <input
-                type="text"
-                placeholder="Search..."
-                value={filter}
-                onChange={handleFilterChange}
-            />
-            {filteredAndSortedProducts.map(product => (
-                <div key={product.id}>
-                    <h3>
-                        <Link to={`/products/${product.id}`}>{product.name}</Link>
-                    </h3>
-                    <p>Size: {product.size}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+
+            <div className="products-grid">
+                {filteredAndSortedProducts.map(product => (
+                    <div id="product-item" key={product.id}>
+                        <Link to={`/products/${product.id}`}>
+                            <img src={product.imageurl} alt={product.name} className="product-image" />
+                        </Link>
+                        <div className="product-details">
+                            <h3 className="product-name">
+                                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                            </h3>
+                            <p>${product.price}</p>
+                            <p>Size: {product.size}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

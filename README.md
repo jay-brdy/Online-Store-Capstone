@@ -12,7 +12,6 @@ Utilizing [Material UI (MUI)](https://mui.com/material-ui/), an open-source Reac
 Products are based off [fish from Animal Crossing - New Horizons](https://animalcrossing.fandom.com/wiki/Fish_(New_Horizons)).
 
 ## What's new...
-View my backend database via 
 Updated 4/16/2024: User's are now able to:
 * View products without logging in
 * Register for an account

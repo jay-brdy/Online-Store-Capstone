@@ -50,6 +50,10 @@ app.post('/api/auth/register', async (req, res, next) => {
   const { username, password } = req.body;
   try {
     const newUser = await createUser({ username, password });
+
+    // create a cart for newly registered user
+    await createCart({ user_id: newUser.id });
+
     res.status(201).json(newUser);
   } catch (error) {
     next(error);
